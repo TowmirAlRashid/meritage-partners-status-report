@@ -65,10 +65,40 @@ const PieChart = ({ contactedTargetStatusArray, graphData }) => {
           // flexDirection: "row",
           alignItems: "center",
           justifyContent: "center",
-          pb: "0.5rem",
+          p: "1rem",
         }}
       >
-        <Pie data={data} />
+        <Pie
+          data={data}
+          options={{
+            title: {
+              display: true,
+              text: "Contacted Target Status Graph",
+              fontSize: 20,
+            },
+            maintainAspectRatio: false,
+            plugins: {
+              legend: {
+                display: true,
+                position: "left",
+              },
+            },
+            scales: {
+              xAxes: [
+                {
+                  stacked: true,
+                  barPercentage: 0.2,
+                },
+              ],
+              yAxes: [
+                {
+                  stacked: true,
+                  barPercentage: 0.2,
+                },
+              ],
+            },
+          }}
+        />
       </Box>
     </Box>
   );
