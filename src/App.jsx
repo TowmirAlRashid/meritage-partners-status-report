@@ -1,4 +1,4 @@
-import { Box } from "@mui/material";
+import { Box, CircularProgress, Typography } from "@mui/material";
 import { useEffect, useState } from "react";
 import Billing from "./components/Billing";
 import Charts from "./components/Charts";
@@ -182,7 +182,30 @@ function App() {
       </Box>
     );
   } else {
-    return <h2>Loading...</h2>;
+    return (
+      <Box
+        sx={{
+          width: "100%",
+          height: "100%",
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            flexDirection: "column",
+            gap: "1rem",
+            margin: "20% 0",
+          }}
+        >
+          <CircularProgress color="inherit" />
+          <Typography fontWeight="bold" fontSize="1.5rem">
+            Fetching Data. Please Wait...
+          </Typography>
+        </Box>
+      </Box>
+    );
   }
 }
 
