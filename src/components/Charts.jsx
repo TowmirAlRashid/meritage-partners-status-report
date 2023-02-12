@@ -35,6 +35,10 @@ const Charts = ({ contactedTargets }) => {
       if (status in statusCount) {
         statusCount[status]++;
       }
+
+      if (status === null) {
+        statusCount["-None-"]++;
+      }
     }
 
     let result = [];
