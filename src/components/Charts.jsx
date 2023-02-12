@@ -56,7 +56,7 @@ const Charts = ({ contactedTargets }) => {
       sx={{
         width: "100%",
         display: "flex",
-        flexDirection: "column",
+        flexDirection: "row",
         justifyContent: "center",
         alignItems: "center",
         flexWrap: "wrap",

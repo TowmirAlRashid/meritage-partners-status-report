@@ -51,7 +51,7 @@ const PieChart = ({ contactedTargetStatusArray, graphData }) => {
   return (
     <Box
       sx={{
-        width: "97%",
+        width: "49%",
         height: "500px",
         backgroundColor: "#d9d9d9",
         m: "1rem auto",

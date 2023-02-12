@@ -20,7 +20,7 @@ const BarChart = ({ contactedTargetStatusArray, graphData }) => {
   return (
     <Box
       sx={{
-        width: "97%",
+        width: "49%",
         m: "1rem auto",
         height: "500px",
         backgroundColor: "#d9d9d9",

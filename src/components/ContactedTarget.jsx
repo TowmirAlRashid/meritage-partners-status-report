@@ -3,34 +3,36 @@ import {
   Table,
   TableBody,
   TableCell,
+  tableCellClasses,
   TableContainer,
   TableHead,
   TableRow,
   Typography,
 } from "@mui/material";
+import { styled } from "@mui/material/styles";
 import { DataGrid } from "@mui/x-data-grid";
 import React from "react";
 
 const ContactedTarget = ({ contactedTargets }) => {
-  const columns = [
-    // custom columns for the top 10 deals
-    {
-      field: "Name",
-      headerName: "Name",
-      flex: 1.5,
+  const StyledTableCell = styled(TableCell)(({ theme }) => ({
+    [`&.${tableCellClasses.head}`]: {
+      backgroundColor: theme.palette.common.black,
+      color: theme.palette.common.white,
     },
-    {
-      field: "Company_Name",
-      headerName: "Group",
-      flex: 1.5,
+    [`&.${tableCellClasses.body}`]: {
+      fontSize: 11,
     },
-    {
-      field: "Status",
-      headerName: "Status",
-      align: "left",
-      flex: 1,
+  }));
+
+  const StyledTableRow = styled(TableRow)(({ theme }) => ({
+    "&:nth-of-type(odd)": {
+      backgroundColor: theme.palette.action.hover,
     },
-  ];
+    // hide last border
+    "&:last-child td, &:last-child th": {
+      border: 0,
+    },
+  }));
 
   return (
     <Box
@@ -57,27 +59,29 @@ const ContactedTarget = ({ contactedTargets }) => {
           <Table sx={{ minWidth: 650 }} size="small" aria-label="dense table">
             <TableHead>
               <TableRow>
-                <TableCell align="left">Name</TableCell>
-                <TableCell align="left">Group</TableCell>
-                <TableCell align="left">Status</TableCell>
+                <StyledTableCell align="left">Name</StyledTableCell>
+                <StyledTableCell align="left">Group</StyledTableCell>
+                <StyledTableCell align="left">Status</StyledTableCell>
               </TableRow>
             </TableHead>
 
             <TableBody>
               {contactedTargets?.map((contactedTarget, index) => {
                 return (
-                  <TableRow
+                  <StyledTableRow
                     key={index}
                     // sx={{ "&:last-child td, &:last-child th": { border: 0 } }}
                   >
-                    <TableCell align="left">{contactedTarget?.Name}</TableCell>
-                    <TableCell align="left">
+                    <StyledTableCell align="left">
+                      {contactedTarget?.Name}
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
                       {contactedTarget?.Company_Name}
-                    </TableCell>
-                    <TableCell align="left">
+                    </StyledTableCell>
+                    <StyledTableCell align="left">
                       {contactedTarget?.Status}
-                    </TableCell>
-                  </TableRow>
+                    </StyledTableCell>
+                  </StyledTableRow>
                 );
               })}
             </TableBody>
