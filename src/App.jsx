@@ -27,7 +27,7 @@ function App() {
     });
 
     ZOHO.embeddedApp.init().then(() => {
-      ZOHO.CRM.UI.Resize({ height: "600", width: "1000" });
+      ZOHO.CRM.UI.Resize({ height: "800", width: "1000" });
       setInitialized(true);
     });
   }, []);
@@ -74,7 +74,14 @@ function App() {
           }
         );
 
-        console.log(engagementContactedTargets);
+        setContactedTargets(
+          engagementContactedTargets?.data?.map((contactedTarget) => {
+            return {
+              ...contactedTarget,
+              Company_Name: contactedTarget?.Company_Name?.name,
+            };
+          })
+        );
       };
 
       fetchData();
@@ -83,7 +90,7 @@ function App() {
 
   // console.log(engagementResponse);
 
-  if (engagementResponse && engagementParentAccount) {
+  if (engagementResponse && engagementParentAccount && contactedTargets) {
     return (
       <Box
         sx={{
@@ -144,7 +151,7 @@ function App() {
             borderBottom: "2px solid black",
           }}
         >
-          <Charts />
+          <Charts contactedTargets={contactedTargets} />
         </Box>
 
         <Box
@@ -157,7 +164,7 @@ function App() {
             borderBottom: "2px solid black",
           }}
         >
-          <ContactedTarget />
+          <ContactedTarget contactedTargets={contactedTargets} />
         </Box>
 
         <Box

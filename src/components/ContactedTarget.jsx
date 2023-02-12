@@ -1,9 +1,28 @@
 import { Box, Typography } from "@mui/material";
+import { DataGrid } from "@mui/x-data-grid";
 import React from "react";
 
-import data from "../contactedTargetData";
+const ContactedTarget = ({ contactedTargets }) => {
+  const columns = [
+    // custom columns for the top 10 deals
+    {
+      field: "Name",
+      headerName: "Name",
+      flex: 1.5,
+    },
+    {
+      field: "Company_Name",
+      headerName: "Group",
+      flex: 1.5,
+    },
+    {
+      field: "Status",
+      headerName: "Status",
+      align: "left",
+      flex: 1,
+    },
+  ];
 
-const ContactedTarget = () => {
   return (
     <Box
       sx={{
@@ -21,125 +40,19 @@ const ContactedTarget = () => {
 
       <Box
         sx={{
-          width: "100%",
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "flex-start",
-          alignItems: "flex-start",
-          gap: "0.4rem",
+          width: "98%",
+          m: "1.5rem auto",
+          height: `calc(111px + ${10 * 42}px)`,
         }}
       >
-        <Box
-          sx={{
-            width: "100%",
-            display: "flex",
-            flexDirection: "row",
-            justifyContent: "flex-start",
-            alignItems: "flex-start",
-          }}
-        >
-          <Typography
-            variant="p"
-            fontSize={12}
-            fontWeight="bold"
-            textAlign="left"
-            sx={{ width: "15%" }}
-          >
-            Name
-          </Typography>
-          <Typography
-            variant="p"
-            fontSize={12}
-            fontWeight="bold"
-            textAlign="left"
-            sx={{ width: "15%" }}
-          >
-            Group
-          </Typography>
-          <Typography
-            variant="p"
-            fontSize={12}
-            fontWeight="bold"
-            textAlign="left"
-            sx={{ width: "15%" }}
-          >
-            Status
-          </Typography>
-          <Typography
-            variant="p"
-            fontSize={12}
-            fontWeight="bold"
-            textAlign="left"
-            sx={{ width: "15%" }}
-          >
-            Source
-          </Typography>
-          <Typography
-            variant="p"
-            fontSize={12}
-            fontWeight="bold"
-            textAlign="left"
-            sx={{ width: "40%" }}
-          >
-            Note
-          </Typography>
-        </Box>
-
-        {data.map((singleData) => {
-          return (
-            <Box
-              key={singleData?.id}
-              sx={{
-                width: "100%",
-                display: "flex",
-                flexDirection: "row",
-                justifyContent: "flex-start",
-                alignItems: "flex-start",
-              }}
-            >
-              <Typography
-                variant="p"
-                fontSize={12}
-                textAlign="left"
-                sx={{ width: "15%" }}
-              >
-                {singleData.name}
-              </Typography>
-              <Typography
-                variant="p"
-                fontSize={12}
-                textAlign="left"
-                sx={{ width: "15%" }}
-              >
-                {singleData.group}
-              </Typography>
-              <Typography
-                variant="p"
-                fontSize={12}
-                textAlign="left"
-                sx={{ width: "15%" }}
-              >
-                {singleData.status}
-              </Typography>
-              <Typography
-                variant="p"
-                fontSize={12}
-                textAlign="left"
-                sx={{ width: "15%" }}
-              >
-                {singleData.source}
-              </Typography>
-              <Typography
-                variant="p"
-                fontSize={12}
-                textAlign="left"
-                sx={{ width: "40%" }}
-              >
-                {singleData.note}
-              </Typography>
-            </Box>
-          );
-        })}
+        <DataGrid
+          rows={contactedTargets || []}
+          columns={columns}
+          pageSize={10}
+          rowsPerPageOptions={[10]}
+          disableSelectionOnClick
+          rowHeight={42}
+        />
       </Box>
     </Box>
   );

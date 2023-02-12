@@ -1,16 +1,62 @@
-import { Box } from '@mui/material'
-import React from 'react'
+import { Box } from "@mui/material";
+import React from "react";
 
-const BarChart = () => {
+import Chart from "chart.js/auto";
+import { Bar } from "react-chartjs-2";
+
+const BarChart = ({ contactedTargetStatusArray, graphData }) => {
+  const data = {
+    labels: contactedTargetStatusArray,
+    datasets: [
+      {
+        label: "Contacted Target Status Graph",
+        data: [...graphData],
+        borderColor: "blue",
+        backgroundColor: "blue",
+      },
+    ],
+  };
+
   return (
     <Box
-        sx={{
-            width: "45%",
-            height: "300px",
-            backgroundColor: "#d9d9d9"
+      sx={{
+        width: "97%",
+        m: "1rem auto",
+        height: "500px",
+        backgroundColor: "#d9d9d9",
+      }}
+    >
+      <Bar
+        data={data}
+        options={{
+          title: {
+            display: true,
+            text: "Contacted Target Status Graph",
+            fontSize: 20,
+          },
+          maintainAspectRatio: false,
+          legend: {
+            display: true,
+            position: "top",
+          },
+          scales: {
+            xAxes: [
+              {
+                stacked: true,
+                barPercentage: 0.2,
+              },
+            ],
+            yAxes: [
+              {
+                stacked: true,
+                barPercentage: 0.2,
+              },
+            ],
+          },
         }}
-    >BarChart</Box>
-  )
-}
+      />
+    </Box>
+  );
+};
 
-export default BarChart
+export default BarChart;
