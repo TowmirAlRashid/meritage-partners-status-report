@@ -1,4 +1,13 @@
-import { Box, Button, CircularProgress, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  CircularProgress,
+  Table,
+  TableBody,
+  TableContainer,
+  TableRow,
+  Typography,
+} from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import Billing from "./components/Billing";
 import Charts from "./components/Charts";
@@ -105,94 +114,102 @@ function App() {
 
   if (engagementResponse && engagementParentAccount && contactedTargets) {
     return (
-      <Box
-        sx={{
-          width: "100%",
-          height: "100%",
-        }}
-        ref={componentRef}
-        className="print"
-      >
+      <>
         <Box
           sx={{
-            width: "98%",
-            padding: "0.5rem",
-            m: "2rem auto 0",
-            border: "2px solid black",
+            width: "100%",
+            height: "100%",
           }}
+          ref={componentRef}
+          className="print"
         >
-          <ReportLabelInfo
-            engagementResponse={engagementResponse}
-            engagementParentAccount={engagementParentAccount}
-          />
-        </Box>
+          <Box
+            sx={{
+              width: "98%",
+              padding: "0.5rem",
+              m: "2rem auto 0",
+              border: "2px solid black",
+            }}
+          >
+            <ReportLabelInfo
+              engagementResponse={engagementResponse}
+              engagementParentAccount={engagementParentAccount}
+            />
+          </Box>
 
-        <Box
-          sx={{
-            width: "98%",
-            padding: "0.5rem",
-            m: "0 auto 0",
-            borderRight: "2px solid black",
-            borderLeft: "2px solid black",
-            borderBottom: "2px solid black",
-          }}
-        >
-          <PhasesAndTimeline
-            engagementResponse={engagementResponse}
-            notes={notes}
-          />
-        </Box>
+          <Box
+            sx={{
+              width: "98%",
+              padding: "0.5rem",
+              m: "0 auto 0",
+              borderRight: "2px solid black",
+              borderLeft: "2px solid black",
+              borderBottom: "2px solid black",
+            }}
+            style={{ pageBreakAfter: "always" }}
+          >
+            <PhasesAndTimeline
+              engagementResponse={engagementResponse}
+              notes={notes}
+            />
+          </Box>
 
-        <Box
-          sx={{
-            width: "98%",
-            padding: "0.5rem",
-            m: "0 auto 0",
-            borderRight: "2px solid black",
-            borderLeft: "2px solid black",
-            borderBottom: "2px solid black",
-          }}
-        >
-          <Billing />
-        </Box>
+          <Box
+            sx={{
+              width: "98%",
+              padding: "0.5rem",
+              m: "0 auto 0",
+              borderRight: "2px solid black",
+              borderLeft: "2px solid black",
+              borderBottom: "2px solid black",
+            }}
+            className="page-break"
+          >
+            <Billing />
+          </Box>
 
-        <Box
-          sx={{
-            width: "98%",
-            padding: "0.5rem",
-            m: "0 auto 0",
-            borderRight: "2px solid black",
-            borderLeft: "2px solid black",
-            borderBottom: "2px solid black",
-          }}
-        >
-          <Charts contactedTargets={contactedTargets} />
-        </Box>
+          <Box
+            sx={{
+              width: "98%",
+              padding: "0.5rem",
+              m: "0 auto 0",
+              borderRight: "2px solid black",
+              borderLeft: "2px solid black",
+              borderBottom: "2px solid black",
+            }}
+            style={{ pageBreakAfter: "always" }}
+          >
+            <Charts contactedTargets={contactedTargets} />
+          </Box>
 
-        <Box
-          sx={{
-            width: "98%",
-            padding: "0.5rem",
-            m: "0 auto 0",
-            borderRight: "2px solid black",
-            borderLeft: "2px solid black",
-            borderBottom: "2px solid black",
-          }}
-        >
-          <ContactedTarget contactedTargets={contactedTargets} />
-        </Box>
+          <Box
+            sx={{
+              width: "98%",
+              padding: "0.5rem",
+              m: "0 auto 0",
+              borderRight: "2px solid black",
+              borderLeft: "2px solid black",
+              borderBottom: "2px solid black",
+            }}
+            className="page-break"
+            style={{ pageBreakAfter: "always" }}
+          >
+            <ContactedTarget contactedTargets={contactedTargets} />
+          </Box>
 
-        <Box
-          sx={{
-            width: "98%",
-            padding: "0.5rem",
-            m: "0 auto 2rem",
-            borderRight: "2px solid black",
-            borderLeft: "2px solid black",
-            borderBottom: "2px solid black",
-          }}
-        >
-          <EmailStats />
+          <Box
+            sx={{
+              width: "98%",
+              padding: "0.5rem",
+              m: "0 auto 2rem",
+              borderRight: "2px solid black",
+              borderLeft: "2px solid black",
+              borderBottom: "2px solid black",
+            }}
+            className="page-break"
+          >
+            <EmailStats />
+          </Box>
         </Box>
 
         <Box
@@ -225,7 +242,7 @@ function App() {
             )}
           </Button>
         </Box>
-      </Box>
+      </>
     );
   } else {
     return (
