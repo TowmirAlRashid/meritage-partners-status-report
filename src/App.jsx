@@ -1,5 +1,5 @@
-import { Box, CircularProgress, Typography } from "@mui/material";
-import { useEffect, useState } from "react";
+import { Box, Button, CircularProgress, Typography } from "@mui/material";
+import { useEffect, useRef, useState } from "react";
 import Billing from "./components/Billing";
 import Charts from "./components/Charts";
 import ContactedTarget from "./components/ContactedTarget";
@@ -7,6 +7,10 @@ import EmailStats from "./components/EmailStats";
 import PhasesAndTimeline from "./components/PhasesAndTimeline";
 
 import ReportLabelInfo from "./components/ReportLabelInfo";
+
+import { useReactToPrint } from "react-to-print";
+
+import "./app.css";
 
 const ZOHO = window.ZOHO;
 
@@ -18,6 +22,15 @@ function App() {
   const [engagementParentAccount, setEngagementParentAccount] = useState(); // get the parent account info for the current engagement record
   const [notes, setNotes] = useState(); // gets the notes for the current record
   const [contactedTargets, setContactedTargets] = useState(); // gets the contacted targets for the current record
+
+  const [downloadingPdfLoading, setDownloadPdfLoading] = useState(false);
+  const [showForDownload, setShowForDownload] = useState(false);
+
+  const componentRef = useRef();
+
+  const handlePrint = useReactToPrint({
+    content: () => componentRef.current,
+  });
 
   useEffect(() => {
     ZOHO.embeddedApp.on("PageLoad", function (data) {
@@ -97,6 +110,8 @@ function App() {
           width: "100%",
           height: "100%",
         }}
+        ref={componentRef}
+        className="print"
       >
         <Box
           sx={{
@@ -178,6 +193,37 @@ function App() {
           }}
         >
           <EmailStats />
+        </Box>
+
+        <Box
+          sx={{
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            m: "1.5rem auto",
+          }}
+        >
+          <Button
+            variant="contained"
+            onClick={() => {
+              setDownloadPdfLoading(true);
+              setShowForDownload(true);
+              setTimeout(() => {
+                handlePrint();
+                setDownloadPdfLoading(false);
+              }, 2000);
+              setTimeout(() => {
+                setShowForDownload(false);
+              }, 7000);
+            }}
+          >
+            {downloadingPdfLoading ? (
+              <CircularProgress size={20} color="inherit" />
+            ) : (
+              "Download PDF"
+            )}
+          </Button>
         </Box>
       </Box>
     );
