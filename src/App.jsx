@@ -31,6 +31,8 @@ function App() {
   const [engagementParentAccount, setEngagementParentAccount] = useState(); // get the parent account info for the current engagement record
   const [notes, setNotes] = useState(); // gets the notes for the current record
   const [contactedTargets, setContactedTargets] = useState(); // gets the contacted targets for the current record
+  const [campaignKeys, setCampaignKeys] = useState(); // gets the campaign keys for this record
+  const [campaignDetails, setCampaignDetails] = useState();
 
   const [downloadingPdfLoading, setDownloadPdfLoading] = useState(false);
   const [showForDownload, setShowForDownload] = useState(false);
@@ -62,6 +64,7 @@ function App() {
           RecordID: entityId,
         });
         setEngagementResponse(engagementResp?.data?.[0]);
+        setCampaignKeys(engagementResp?.data?.[0]?.Campaign_Keys?.split(","));
 
         const engagementParentAccountInfo = await ZOHO.CRM.API.getRecord({
           Entity: "Accounts",
@@ -104,15 +107,42 @@ function App() {
             };
           })
         );
+
+        const campaignResponseArray = [];
+
+        const conn_name = "zoho_campaign_conn";
+        for (let i = 0; i < campaignKeys?.length; i++) {
+          let req_data_campaigns = {
+            method: "GET",
+            url: `https://campaigns.zoho.com/api/v1.1/getcampaigndetails?&campaignkey=${campaignKeys[i]}&resfmt=JSON`,
+          };
+
+          const campaignResp = await ZOHO.CRM.CONNECTION.invoke(
+            conn_name,
+            req_data_campaigns
+          );
+
+          // console.log(campaignResp);
+
+          campaignResponseArray.push(campaignResp?.details?.statusMessage);
+        }
+
+        setCampaignDetails(campaignResponseArray);
       };
 
       fetchData();
     }
   }, [initialized]);
+  // console.log(campaignKeys);
 
-  // console.log(engagementResponse);
+  // engagementResponse && engagementParentAccount && contactedTargets
 
-  if (engagementResponse && engagementParentAccount && contactedTargets) {
+  if (
+    engagementResponse &&
+    engagementParentAccount &&
+    contactedTargets &&
+    campaignDetails
+  ) {
     return (
       <>
         <Box
@@ -208,7 +238,7 @@ function App() {
             }}
             className="page-break"
           >
-            <EmailStats />
+            <EmailStats campaignDetails={campaignDetails} />
           </Box>
         </Box>
 

@@ -30,7 +30,7 @@ const Charts = ({ contactedTargets }) => {
     }
 
     // Count the number of times each status appears in the array of objects
-    for (let i = 0; i < arrayOfObjects.length; i++) {
+    for (let i = 0; i < arrayOfObjects?.length; i++) {
       let status = arrayOfObjects[i].Status;
       if (status in statusCount) {
         statusCount[status]++;
