@@ -31,7 +31,6 @@ function App() {
   const [engagementParentAccount, setEngagementParentAccount] = useState(); // get the parent account info for the current engagement record
   const [notes, setNotes] = useState(); // gets the notes for the current record
   const [contactedTargets, setContactedTargets] = useState(); // gets the contacted targets for the current record
-  const [campaignKeys, setCampaignKeys] = useState(); // gets the campaign keys for this record
   const [campaignDetails, setCampaignDetails] = useState();
 
   const [downloadingPdfLoading, setDownloadPdfLoading] = useState(false);
@@ -64,16 +63,15 @@ function App() {
           RecordID: entityId,
         });
         setEngagementResponse(engagementResp?.data?.[0]);
-        setCampaignKeys(engagementResp?.data?.[0]?.Campaign_Keys?.split(","));
+
+        const campaignArray =
+          engagementResp?.data?.[0]?.Campaign_Keys?.split(",") || [];
 
         const engagementParentAccountInfo = await ZOHO.CRM.API.getRecord({
           Entity: "Accounts",
           RecordID: engagementResponse?.Account_Name?.id,
         });
-        setEngagementParentAccount(
-          "account",
-          engagementParentAccountInfo?.data?.[0]
-        );
+        setEngagementParentAccount(engagementParentAccountInfo?.data?.[0]);
 
         const engagementNotes = await ZOHO.CRM.API.getRelatedRecords({
           Entity: entity,
@@ -111,10 +109,10 @@ function App() {
         const campaignResponseArray = [];
 
         const conn_name = "zoho_campaign_conn";
-        for (let i = 0; i < campaignKeys?.length; i++) {
+        for (const key of campaignArray) {
           let req_data_campaigns = {
             method: "GET",
-            url: `https://campaigns.zoho.com/api/v1.1/getcampaigndetails?&campaignkey=${campaignKeys[i]}&resfmt=JSON`,
+            url: `https://campaigns.zoho.com/api/v1.1/getcampaigndetails?&campaignkey=${key}&resfmt=JSON`,
           };
 
           const campaignResp = await ZOHO.CRM.CONNECTION.invoke(
@@ -122,7 +120,7 @@ function App() {
             req_data_campaigns
           );
 
-          // console.log(campaignResp);
+          console.log(campaignResp);
 
           campaignResponseArray.push(campaignResp?.details?.statusMessage);
         }
@@ -133,16 +131,10 @@ function App() {
       fetchData();
     }
   }, [initialized]);
-  // console.log(campaignKeys);
 
   // engagementResponse && engagementParentAccount && contactedTargets
 
-  if (
-    engagementResponse &&
-    engagementParentAccount &&
-    contactedTargets &&
-    campaignDetails
-  ) {
+  if (engagementResponse && engagementParentAccount) {
     return (
       <>
         <Box
@@ -198,48 +190,60 @@ function App() {
             <Billing />
           </Box>
 
-          <Box
-            sx={{
-              width: "98%",
-              padding: "0.5rem",
-              m: "0 auto 0",
-              borderRight: "2px solid black",
-              borderLeft: "2px solid black",
-              borderBottom: "2px solid black",
-            }}
-            style={{ pageBreakAfter: "always" }}
-          >
-            <Charts contactedTargets={contactedTargets} />
-          </Box>
+          {contactedTargets ? (
+            <>
+              <Box
+                sx={{
+                  width: "98%",
+                  padding: "0.5rem",
+                  m: "0 auto 0",
+                  borderRight: "2px solid black",
+                  borderLeft: "2px solid black",
+                  borderBottom: "2px solid black",
+                }}
+                style={{ pageBreakAfter: "always" }}
+              >
+                <Charts contactedTargets={contactedTargets} />
+              </Box>
 
-          <Box
-            sx={{
-              width: "98%",
-              padding: "0.5rem",
-              m: "0 auto 0",
-              borderRight: "2px solid black",
-              borderLeft: "2px solid black",
-              borderBottom: "2px solid black",
-            }}
-            className="page-break"
-            style={{ pageBreakAfter: "always" }}
-          >
-            <ContactedTarget contactedTargets={contactedTargets} />
-          </Box>
+              <Box
+                sx={{
+                  width: "98%",
+                  padding: "0.5rem",
+                  m: "0 auto 0",
+                  borderRight: "2px solid black",
+                  borderLeft: "2px solid black",
+                  borderBottom: "2px solid black",
+                }}
+                className="page-break"
+                style={{ pageBreakAfter: "always" }}
+              >
+                <ContactedTarget contactedTargets={contactedTargets} />
+              </Box>
+            </>
+          ) : (
+            <Typography
+              sx={{ fontSize: "1rem", textAlign: "center", m: "1rem auto" }}
+            >
+              No Contacted Target found for this engagement
+            </Typography>
+          )}
 
-          <Box
-            sx={{
-              width: "98%",
-              padding: "0.5rem",
-              m: "0 auto 2rem",
-              borderRight: "2px solid black",
-              borderLeft: "2px solid black",
-              borderBottom: "2px solid black",
-            }}
-            className="page-break"
-          >
-            <EmailStats campaignDetails={campaignDetails} />
-          </Box>
+          {campaignDetails?.length > 0 && (
+            <Box
+              sx={{
+                width: "98%",
+                padding: "0.5rem",
+                m: "0 auto 2rem",
+                borderRight: "2px solid black",
+                borderLeft: "2px solid black",
+                borderBottom: "2px solid black",
+              }}
+              className="page-break"
+            >
+              <EmailStats campaignDetails={campaignDetails} />
+            </Box>
+          )}
         </Box>
 
         <Box
