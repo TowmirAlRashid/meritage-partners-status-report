@@ -3,7 +3,11 @@ import React from "react";
 
 import Logo from "../assets/Logo.png";
 
-const ReportLabelInfo = ({ engagementResponse, engagementParentAccount }) => {
+const ReportLabelInfo = ({
+  engagementResponse,
+  engagementParentAccount,
+  engagementParentContact,
+}) => {
   return (
     <Box
       sx={{
@@ -165,7 +169,9 @@ const ReportLabelInfo = ({ engagementResponse, engagementParentAccount }) => {
             </Box>
             <Box>
               <Typography variant="p" fontSize={12}>
-                Brian Perry <br /> brianperry01@gmail.com <br /> 909-702-2775
+                {engagementParentContact?.Full_Name} <br />{" "}
+                {engagementParentContact?.Email} <br />{" "}
+                {engagementParentContact?.Direct_Phone}
               </Typography>
             </Box>
           </Box>

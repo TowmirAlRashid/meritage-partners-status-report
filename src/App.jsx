@@ -29,6 +29,7 @@ function App() {
   const [entityId, setEntityId] = useState(); // get the record id
   const [engagementResponse, setEngagementResponse] = useState(); // get the record details
   const [engagementParentAccount, setEngagementParentAccount] = useState(); // get the parent account info for the current engagement record
+  const [engagementParentContact, setEngagementParentContact] = useState(); // get the parent contact info for the current engagement record
   const [notes, setNotes] = useState(); // gets the notes for the current record
   const [contactedTargets, setContactedTargets] = useState(); // gets the contacted targets for the current record
   const [campaignDetails, setCampaignDetails] = useState();
@@ -69,7 +70,7 @@ function App() {
 
         const engagementParentAccountInfo = await ZOHO.CRM.API.getRecord({
           Entity: "Accounts",
-          RecordID: engagementResponse?.Account_Name?.id,
+          RecordID: engagementResp?.data?.[0]?.Account_Name?.id,
         });
         setEngagementParentAccount(engagementParentAccountInfo?.data?.[0]);
 
@@ -120,12 +121,19 @@ function App() {
             req_data_campaigns
           );
 
-          console.log(campaignResp);
+          // console.log(campaignResp);
 
           campaignResponseArray.push(campaignResp?.details?.statusMessage);
         }
 
         setCampaignDetails(campaignResponseArray);
+
+        const engagementParentContactInfo = await ZOHO.CRM.API.getRecord({
+          Entity: "Contacts",
+          RecordID: engagementResp?.data?.[0]?.Contact_Name?.id,
+        });
+
+        setEngagementParentContact(engagementParentContactInfo?.data?.[0]);
       };
 
       fetchData();
@@ -134,7 +142,11 @@ function App() {
 
   // engagementResponse && engagementParentAccount && contactedTargets
 
-  if (engagementResponse && engagementParentAccount) {
+  if (
+    engagementResponse &&
+    engagementParentAccount &&
+    engagementParentContact
+  ) {
     return (
       <>
         <Box
@@ -156,6 +168,7 @@ function App() {
             <ReportLabelInfo
               engagementResponse={engagementResponse}
               engagementParentAccount={engagementParentAccount}
+              engagementParentContact={engagementParentContact}
             />
           </Box>
 
