@@ -197,7 +197,11 @@ const ReportLabelInfo = ({ engagementResponse, engagementParentAccount }) => {
             </Box>
             <Box>
               <Typography variant="p" fontSize={12}>
-                {engagementResponse?.Closing_Date}
+                {new Date().getFullYear()}-
+                {new Date().getMonth() + 1 < 10
+                  ? "0" + (new Date().getMonth() + 1)
+                  : new Date().getMonth() + 1}
+                -{new Date().getDate()}
               </Typography>
             </Box>
           </Box>
