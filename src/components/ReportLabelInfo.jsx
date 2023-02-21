@@ -1,7 +1,7 @@
 import { Box, Typography } from "@mui/material";
 import React from "react";
 
-import Logo from "../assets/Logo.png";
+import Logo from "../assets/Logo.jpeg";
 
 const ReportLabelInfo = ({
   engagementResponse,
