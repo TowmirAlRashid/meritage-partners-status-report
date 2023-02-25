@@ -149,11 +149,7 @@ function App() {
 
   // engagementResponse && engagementParentAccount && contactedTargets
 
-  if (
-    engagementResponse &&
-    engagementParentAccount &&
-    engagementParentContact
-  ) {
+  if (engagementResponse && engagementParentAccount) {
     return (
       <>
         <Box
