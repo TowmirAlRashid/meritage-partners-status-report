@@ -3,49 +3,43 @@ const stages = [
     name: "On-Boarding/Intake",
     color: "#f8e5e1",
     description:
-      "Onboarding/Intake is the process of introducing a new employee to the company and its policies, procedures, and culture. It includes activities such as orientation, paperwork completion, HR and benefits enrollment, and training. The goal of onboarding is to set the new employee up for success and integrate them into the organization smoothly.",
+      "Currently, we are in the on boarding and intake phase. During the next several weeks, we will ask for financial spreadsheets in excel form everything from profit and loss to balance sheet statements for the last several years as well as gathering projections for the years to come. In addition, there will be an in-depth questionnaire, asking questions about the company, the transaction, rationale, employee, count, industry, statistics, etc. This phase is extremely important, and will become the basis of which the confidential information memorandum will be created and distributed to interested parties. In this phase we are gathering the numbers and the narrative for the market to review.",
   },
   {
     name: "Pre Market",
     color: "#e7e8ed",
     description:
-      "Pre Market and Market state in Zoho CRM refers to the process of evaluating and analyzing data related to financial performance and market trends. It involves utilizing data from various sources such as financial reports, sales data, customer information, and industry trends to gain insights into the financial health of the company and market conditions. In Zoho CRM, this analysis can be done through the use of built-in reports, dashboards, and analytics tools to help businesses make informed decisions and improve their overall performance.",
-  },
-  {
-    name: "Preparation",
-    color: "#e1f0d3",
-    description:
-      "The goal of Preparation is to provide businesses with a centralized database of information about their customers, including demographic information, purchasing habits, and communication history. By using Zoho CRM as a base, businesses can efficiently collect, manage, and analyze customer information, allowing them to make informed decisions, improve customer relationships, and drive sales. The CRM provides tools for tracking and managing customer interactions, storing customer information, and analyzing customer data to help businesses develop a successful CIM system.",
+      "Currently, we are in the on boarding and intake phase. During the next several weeks, we will ask for financial spreadsheets in excel form everything from profit and loss to balance sheet statements for the last several years as well as gathering projections for the years to come. In addition, there will be an in-depth questionnaire, asking questions about the company, the transaction, rationale, employee, count, industry, statistics, etc. This phase is extremely important, and will become the basis of which the confidential information memorandum will be created and distributed to interested parties. In this phase we are gathering the numbers and the narrative for the market to review.",
   },
   {
     name: "Marketing",
     color: "#a5d4f1",
     description:
-      "The goal of marketing is to generate leads, increase brand awareness, and ultimately drive sales. By using Zoho CRM as a base, businesses can efficiently manage and automate their marketing efforts, including lead generation, email campaigns, and social media marketing. The CRM provides tools for tracking and analyzing marketing performance, managing leads and contacts, and automating marketing processes to help businesses effectively reach their target audience and achieve their marketing goals.",
+      "Currently, we are in the marketing phase. While we are in the market with this opportunity, we are actively engaging, interested prospects on several databases and investment platforms. Meritage will launch several email campaigns to buyers that correspond with the investment criteria. We regularly attend webinars with private equity groups, who align with our firm's opportunities to engage in conversations in and around your company. During this phase, we will also set up management calls between interested parties who have signed the NDA, received the confidential information memorandum, and want to learn much more about partnering, and/or acquiring your company. After receiving several LOI‘s, the task is to select the best offer with the most favorable terms, and begin to sign the letter of intent after some negotiations have taken place. Once the letter of intent is fully executed, we will begin the due diligence phase.",
   },
   {
     name: "Negotiations",
     color: "#eec992",
     description:
-      "In Zoho CRM, the 'Negotiations' state refers to the process of reaching an agreement between two or more parties. This state is often used in the sales process, where negotiations between a business and a potential customer are used to determine the terms and conditions of a sale. By using Zoho CRM as a base, businesses can efficiently manage and track negotiations, including proposal creation, communication with the customer, and agreement tracking. The CRM provides tools for organizing and storing negotiation information, automating follow-up processes, and tracking the progress of negotiations to help businesses effectively manage the sales process and close more deals.",
+      "Currently, we are in the negotiations phase. During the negotiations phase, it is Meritage’s job to create a win-win scenario between the seller and the buyer. Once the LOI is mutually signed, Meritage will create a data room and begin to house the due diligence process.",
   },
   {
     name: "Due Diligence",
     color: "#a5cfc9",
     description:
-      "In Zoho CRM, the 'Due Diligence' state refers to the process of thoroughly investigating and evaluating a potential investment or acquisition opportunity. The goal of due diligence is to gather as much information as possible to make an informed decision and reduce the risk of making a poor investment. By using Zoho CRM as a base, businesses can efficiently manage and track due diligence activities, including document collection, communication with relevant parties, and progress tracking. The CRM provides tools for organizing and storing due diligence information, automating follow-up processes, and tracking the progress of the investigation to help businesses make informed decisions and reduce the risk of making a poor investment.",
+      "Currently, we are in the due diligence phase. During this part of the process, Meritage Partners will set up a data room to house all of the documents and company information which will ultimately populate the data room. We will be working side-by-side to gather and locate financial information, company, information, insurance, information, and legal information about the company. We will also set up weekly post calls between the seller, buyer, and Meritage, to ensure that they do their due diligence process.  about the company. We will also set up weekly post calls between the seller, buyer, and Meritage to ensure that the due diligence process stays on time and on task.",
   },
   {
     name: "Definitive Agreements",
     color: "#f7e78e",
     description:
-      "In Zoho CRM, the 'Definitive Agreements' state refers to the stage in the sales or investment process where final contracts and agreements are signed and executed. This state is typically reached after successful negotiations and due diligence activities. By using Zoho CRM as a base, businesses can efficiently manage and track definitive agreements, including contract creation, communication with relevant parties, and agreement tracking. The CRM provides tools for organizing and storing agreement information, automating follow-up processes, and tracking the progress of the agreement to help businesses ensure a smooth and successful closing process.",
+      "Currently, we are in the definitive agreement phase. After everything has been gathered and populated in the data room for due diligence, attorneys from both sides will draft up the definitive and final agreements based on all of the data gathering we conducted.",
   },
   {
     name: "Closed",
     color: "crimson",
     description:
-      "In Zoho CRM, the 'Closed' state refers to the stage in the sales process where a deal is successfully completed. This state is typically reached after successful negotiations, due diligence, and execution of definitive agreements. By using Zoho CRM as a base, businesses can efficiently manage and track closed deals, including recording the final agreement details and communication with relevant parties.",
+      "Currently, we are in the closed phase! Congratulations, and thank you for letting Meritage Partners come alongside you on this journey.",
   },
 ];
 

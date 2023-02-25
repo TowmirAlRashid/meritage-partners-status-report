@@ -72,6 +72,7 @@ function App() {
           Entity: "Accounts",
           RecordID: engagementResp?.data?.[0]?.Account_Name?.id,
         });
+        console.log(engagementParentAccountInfo?.data?.[0]);
         setEngagementParentAccount(engagementParentAccountInfo?.data?.[0]);
 
         const engagementNotes = await ZOHO.CRM.API.getRelatedRecords({
@@ -128,10 +129,16 @@ function App() {
 
         setCampaignDetails(campaignResponseArray);
 
-        const engagementParentContactInfo = await ZOHO.CRM.API.getRecord({
-          Entity: "Contacts",
-          RecordID: engagementResp?.data?.[0]?.Contact_Name?.id,
-        });
+        const engagementParentContactInfo =
+          await ZOHO.CRM.API.getRelatedRecords({
+            Entity: "Accounts",
+            RecordID: engagementParentAccountInfo?.data?.[0]?.id,
+            RelatedList: "Contacts",
+            page: 1,
+            per_page: 200,
+          });
+
+        console.log(engagementParentContactInfo?.data?.[0]);
 
         setEngagementParentContact(engagementParentContactInfo?.data?.[0]);
       };
