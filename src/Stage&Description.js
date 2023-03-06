@@ -6,7 +6,7 @@ const stages = [
       "Currently, we are in the on boarding and intake phase. During the next several weeks, we will ask for financial spreadsheets in excel form everything from profit and loss to balance sheet statements for the last several years as well as gathering projections for the years to come. In addition, there will be an in-depth questionnaire, asking questions about the company, the transaction, rationale, employee, count, industry, statistics, etc. This phase is extremely important, and will become the basis of which the confidential information memorandum will be created and distributed to interested parties. In this phase we are gathering the numbers and the narrative for the market to review.",
   },
   {
-    name: "Pre Market",
+    name: "Pre Market Prep",
     color: "#e7e8ed",
     description:
       "Currently, we are in the pre-market preparation phase. This phase has the greatest amount of tasks as it is the most important before we go to market with this opportunity. During this phase, we will verify email addresses for potential investors that we will circulate documents to in the marketplace, marketing materials, such as teasers, and the fully developed, Sim will be created, we will also schedule review meetings with your management team to sign off on the documentation that will circulate the market, and we will launch the campaign on various platforms as well as update  warm circles and Rolodex. Once everything is complete, we will be live in the market and ready to book management calls.",

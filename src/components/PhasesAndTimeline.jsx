@@ -4,7 +4,10 @@ import React, { useState } from "react";
 import stages from "../Stage&Description";
 
 const PhasesAndTimeline = ({ engagementResponse, notes }) => {
-  const [stageName, setStageName] = useState("On-Boarding/Intake");
+  const [stageName, setStageName] = useState(
+    stages?.filter((stage) => stage.name === engagementResponse?.Stage)?.[0]
+      ?.name
+  );
 
   return (
     <Box
