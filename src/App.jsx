@@ -141,6 +141,18 @@ function App() {
         console.log(engagementParentContactInfo?.data?.[0]);
 
         setEngagementParentContact(engagementParentContactInfo?.data?.[0]);
+
+        const invoice_func_name = "fetch_last_12_months_invoice";
+        const invoicesResp = await ZOHO.CRM.FUNCTIONS.execute(
+          invoice_func_name,
+          {
+            arguments: JSON.stringify({
+              deal_id: entityId,
+            }),
+          }
+        );
+
+        console.log(invoicesResp);
       };
 
       fetchData();
