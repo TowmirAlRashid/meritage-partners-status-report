@@ -33,6 +33,8 @@ function App() {
   const [notes, setNotes] = useState(); // gets the notes for the current record
   const [contactedTargets, setContactedTargets] = useState(); // gets the contacted targets for the current record
   const [campaignDetails, setCampaignDetails] = useState();
+  const [engClosingDate, setEngClosingDate] = useState(); // engagement closing date
+  const [invoiceResponse, setInvoiceResponse] = useState(); // keeps the invoices response
 
   const [downloadingPdfLoading, setDownloadPdfLoading] = useState(false);
   const [showForDownload, setShowForDownload] = useState(false);
@@ -64,6 +66,7 @@ function App() {
           RecordID: entityId,
         });
         setEngagementResponse(engagementResp?.data?.[0]);
+        setEngClosingDate(engagementResp?.data?.[0]?.Closing_Date);
 
         const campaignArray =
           engagementResp?.data?.[0]?.Campaign_Keys?.split(",") || [];
@@ -152,7 +155,7 @@ function App() {
           }
         );
 
-        console.log(invoicesResp);
+        setInvoiceResponse(invoicesResp);
       };
 
       fetchData();
@@ -161,7 +164,7 @@ function App() {
 
   // engagementResponse && engagementParentAccount && contactedTargets
 
-  if (engagementResponse && engagementParentAccount) {
+  if (engagementResponse && engagementParentAccount && invoiceResponse) {
     return (
       <>
         <Box
@@ -215,7 +218,10 @@ function App() {
             }}
             className="page-break"
           >
-            <Billing />
+            <Billing
+              engClosingDate={engClosingDate}
+              invoiceResponse={invoiceResponse}
+            />
           </Box>
 
           {contactedTargets ? (
