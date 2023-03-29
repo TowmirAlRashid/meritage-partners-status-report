@@ -36,6 +36,8 @@ function App() {
   const [engClosingDate, setEngClosingDate] = useState(); // engagement closing date
   const [invoiceResponse, setInvoiceResponse] = useState(); // keeps the invoices response
 
+  const [engagementDate, setEngagementDate] = useState();
+
   const [downloadingPdfLoading, setDownloadPdfLoading] = useState(false);
   const [showForDownload, setShowForDownload] = useState(false);
 
@@ -67,6 +69,8 @@ function App() {
         });
         setEngagementResponse(engagementResp?.data?.[0]);
         setEngClosingDate(engagementResp?.data?.[0]?.Closing_Date);
+        setEngagementDate(engagementResp?.data?.[0]?.Created_Time);
+        console.log(engagementResp?.data?.[0]);
 
         const campaignArray =
           engagementResp?.data?.[0]?.Campaign_Keys?.split(",") || [];
@@ -187,6 +191,7 @@ function App() {
               engagementResponse={engagementResponse}
               engagementParentAccount={engagementParentAccount}
               engagementParentContact={engagementParentContact}
+              engagementDate={engagementDate}
             />
           </Box>
 

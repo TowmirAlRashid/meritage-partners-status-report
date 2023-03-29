@@ -7,6 +7,7 @@ const ReportLabelInfo = ({
   engagementResponse,
   engagementParentAccount,
   engagementParentContact,
+  engagementDate,
 }) => {
   return (
     <Box
@@ -203,11 +204,7 @@ const ReportLabelInfo = ({
             </Box>
             <Box>
               <Typography variant="p" fontSize={12}>
-                {new Date().getFullYear()}-
-                {new Date().getMonth() + 1 < 10
-                  ? "0" + (new Date().getMonth() + 1)
-                  : new Date().getMonth() + 1}
-                -{new Date().getDate()}
+                {engagementDate?.split("T")?.[0]}
               </Typography>
             </Box>
           </Box>
@@ -258,7 +255,8 @@ const ReportLabelInfo = ({
         }}
       >
         <Typography textAlign="center" variant="h6" fontWeight="bold">
-          Status Report: Week of 1/1/22
+          Status Report: {new Date().getFullYear()}/{new Date().getMonth() + 1}/
+          {new Date().getDate()}
         </Typography>
       </Box>
     </Box>
