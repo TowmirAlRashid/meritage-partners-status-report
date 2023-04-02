@@ -3,7 +3,7 @@ import React, { useState } from "react";
 
 import stages from "../Stage&Description";
 
-const PhasesAndTimeline = ({ engagementResponse, notes }) => {
+const PhasesAndTimeline = ({ engagementResponse }) => {
   const [stageName, setStageName] = useState(
     stages?.filter((stage) => stage.name === engagementResponse?.Stage)?.[0]
       ?.name
@@ -196,7 +196,7 @@ const PhasesAndTimeline = ({ engagementResponse, notes }) => {
           </Typography>
 
           <Typography variant="p" fontSize={12} textAlign="left">
-            {notes?.[0]?.Note_Content}
+            {engagementResponse?.Notes}
           </Typography>
 
           <Typography

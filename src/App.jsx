@@ -30,7 +30,6 @@ function App() {
   const [engagementResponse, setEngagementResponse] = useState(); // get the record details
   const [engagementParentAccount, setEngagementParentAccount] = useState(); // get the parent account info for the current engagement record
   const [engagementParentContact, setEngagementParentContact] = useState(); // get the parent contact info for the current engagement record
-  const [notes, setNotes] = useState(); // gets the notes for the current record
   const [contactedTargets, setContactedTargets] = useState(); // gets the contacted targets for the current record
   const [campaignDetails, setCampaignDetails] = useState();
   const [engClosingDate, setEngClosingDate] = useState(); // engagement closing date
@@ -70,7 +69,7 @@ function App() {
         setEngagementResponse(engagementResp?.data?.[0]);
         setEngClosingDate(engagementResp?.data?.[0]?.Closing_Date);
         setEngagementDate(engagementResp?.data?.[0]?.Created_Time);
-        console.log(engagementResp?.data?.[0]);
+        // console.log(engagementResp?.data?.[0]);
 
         const campaignArray =
           engagementResp?.data?.[0]?.Campaign_Keys?.split(",") || [];
@@ -79,22 +78,16 @@ function App() {
           Entity: "Accounts",
           RecordID: engagementResp?.data?.[0]?.Account_Name?.id,
         });
-        console.log(engagementParentAccountInfo?.data?.[0]);
+        // console.log(engagementParentAccountInfo?.data?.[0]);
         setEngagementParentAccount(engagementParentAccountInfo?.data?.[0]);
 
-        const engagementNotes = await ZOHO.CRM.API.getRelatedRecords({
+        const engagementTasks = await ZOHO.CRM.API.getRelatedRecords({
           Entity: entity,
           RecordID: entityId,
-          RelatedList: "Notes",
+          RelatedList: "Tasks",
           page: 1,
           per_page: 200,
         });
-        setNotes(
-          engagementNotes?.data?.sort(
-            (note1, note2) =>
-              new Date(note2?.Created_Time) - new Date(note1?.Created_Time)
-          )
-        );
 
         const engagementContactedTargets = await ZOHO.CRM.API.getRelatedRecords(
           {
@@ -145,21 +138,21 @@ function App() {
             per_page: 200,
           });
 
-        console.log(engagementParentContactInfo?.data?.[0]);
+        // console.log(engagementParentContactInfo?.data?.[0]);
 
         setEngagementParentContact(engagementParentContactInfo?.data?.[0]);
 
-        const invoice_func_name = "fetch_last_12_months_invoice";
-        const invoicesResp = await ZOHO.CRM.FUNCTIONS.execute(
-          invoice_func_name,
-          {
-            arguments: JSON.stringify({
-              deal_id: entityId,
-            }),
-          }
-        );
+        // const invoice_func_name = "fetch_last_12_months_invoice";
+        // const invoicesResp = await ZOHO.CRM.FUNCTIONS.execute(
+        //   invoice_func_name,
+        //   {
+        //     arguments: JSON.stringify({
+        //       deal_id: entityId,
+        //     }),
+        //   }
+        // );
 
-        setInvoiceResponse(invoicesResp);
+        setInvoiceResponse(engagementTasks?.data);
       };
 
       fetchData();
@@ -206,10 +199,7 @@ function App() {
             }}
             style={{ pageBreakAfter: "always" }}
           >
-            <PhasesAndTimeline
-              engagementResponse={engagementResponse}
-              notes={notes}
-            />
+            <PhasesAndTimeline engagementResponse={engagementResponse} />
           </Box>
 
           <Box

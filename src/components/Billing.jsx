@@ -2,51 +2,56 @@ import { Box, Typography } from "@mui/material";
 import React from "react";
 
 const Billing = ({ engClosingDate, invoiceResponse }) => {
-  function getMonths(closingDate) {
-    const closing = new Date(closingDate);
-    const closingMonth = closing.getMonth();
-    const months = [];
+  function getStatusByMonth(data) {
+    const startDate = new Date(data[0].Due_Date);
+    const endDate = new Date(data[data.length - 1].Due_Date);
+    const result = [];
 
-    for (let i = closingMonth; i <= 11; i++) {
-      months.push(i);
+    for (let i = 0; i < 12; i++) {
+      const currentDate = new Date(
+        startDate.getFullYear(),
+        startDate.getMonth() + i,
+        1
+      );
+      if (currentDate > endDate) {
+        result.push({ month: `month ${i + 1}`, status: "" });
+        continue;
+      }
+
+      const currentData = data.find((d) => {
+        const dueDate = new Date(d.Due_Date);
+        return dueDate.getMonth() === currentDate.getMonth();
+      });
+
+      result.push({
+        month: `month ${i + 1}`,
+        status: currentData ? currentData.Status : "",
+      });
     }
 
-    for (let i = 0; i < closingMonth; i++) {
-      months.push(i);
-    }
-
-    return months;
+    return result;
   }
-  const monthNumbers = getMonths(engClosingDate);
 
-  function processMonthsData(months, invoiceArray) {
+  function processMonthsData(invoiceArray) {
     // Sort the input array of objects by date in ascending order
     invoiceArray?.sort((a, b) => {
-      const dateA = new Date(a?.date);
-      const dateB = new Date(b?.date);
+      const dateA = new Date(a?.Due_Date);
+      const dateB = new Date(b?.Due_Date);
       return dateA - dateB;
     });
 
     // Create an array of objects representing each month
-    const monthData = months.map((month, index) => {
-      const monthNumber = index + 1;
-      const monthName = `month ${monthNumber}`;
-      const dataForMonth = invoiceArray?.find((item) => {
-        const itemDate = new Date(item?.date);
-        const itemMonth = itemDate.getMonth();
-        return itemMonth === month;
-      });
-      const status = dataForMonth ? dataForMonth?.status : "";
-      return {
-        month: monthName,
-        status: status,
-      };
-    });
+    const monthData = getStatusByMonth(invoiceArray);
+    // console.log(monthData);
 
     return monthData;
   }
 
-  const data = processMonthsData(monthNumbers, invoiceResponse?.data);
+  const data = processMonthsData(
+    invoiceResponse?.filter((invoice) =>
+      invoice?.Subject.toLowerCase().includes("billing")
+    )
+  );
 
   return (
     <Box
