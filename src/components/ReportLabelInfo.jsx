@@ -255,8 +255,15 @@ const ReportLabelInfo = ({
         }}
       >
         <Typography textAlign="center" variant="h6" fontWeight="bold">
-          Status Report: {new Date().getMonth() + 1}/{new Date().getDate()}/
-          {new Date().getFullYear()}
+          Status Report:{" "}
+          {new Date().getMonth() + 1 > 10
+            ? new Date().getMonth() + 1
+            : `0${new Date().getMonth() + 1}`}
+          /
+          {new Date().getDate() > 10
+            ? new Date().getDate()
+            : `0${new Date().getDate()}`}
+          /{new Date().getFullYear()}
         </Typography>
       </Box>
     </Box>
