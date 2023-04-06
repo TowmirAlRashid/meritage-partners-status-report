@@ -255,8 +255,8 @@ const ReportLabelInfo = ({
         }}
       >
         <Typography textAlign="center" variant="h6" fontWeight="bold">
-          Status Report: {new Date().getFullYear()}/{new Date().getMonth() + 1}/
-          {new Date().getDate()}
+          Status Report: {new Date().getMonth() + 1}/{new Date().getDate()}/
+          {new Date().getFullYear()}
         </Typography>
       </Box>
     </Box>
