@@ -9,7 +9,7 @@ const stages = [
     name: "Pre Market Prep",
     color: "#e7e8ed",
     description:
-      "Currently, we are in the pre-market preparation phase. This phase has the greatest amount of tasks as it is the most important before we go to market with this opportunity. During this phase, we will verify email addresses for potential investors that we will circulate documents to in the marketplace, marketing materials, such as teasers, and the fully developed, Sim will be created, we will also schedule review meetings with your management team to sign off on the documentation that will circulate the market, and we will launch the campaign on various platforms as well as update  warm circles and Rolodex. Once everything is complete, we will be live in the market and ready to book management calls.",
+      "Currently, we are in the pre-market preparation phase. This phase has the greatest amount of tasks as it is the most important before we go to market with this opportunity. During this phase, we will verify email addresses for potential investors that we will circulate documents to in the marketplace, marketing materials, such as teasers, and the fully developed, Cim will be created, we will also schedule review meetings with your management team to sign off on the documentation that will circulate the market, and we will launch the campaign on various platforms as well as update  warm circles and Rolodex. Once everything is complete, we will be live in the market and ready to book management calls.",
   },
   {
     name: "Marketing",
