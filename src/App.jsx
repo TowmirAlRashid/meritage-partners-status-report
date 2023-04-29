@@ -152,7 +152,11 @@ function App() {
         //   }
         // );
 
-        setInvoiceResponse(engagementTasks?.data);
+        setInvoiceResponse(
+          engagementTasks?.data?.filter((invoice) =>
+            invoice?.Subject.toLowerCase().includes("billing")
+          )
+        );
       };
 
       fetchData();

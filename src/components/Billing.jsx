@@ -47,11 +47,11 @@ const Billing = ({ engClosingDate, invoiceResponse }) => {
     return monthData;
   }
 
-  const data = processMonthsData(
-    invoiceResponse?.filter((invoice) =>
-      invoice?.Subject.toLowerCase().includes("billing")
-    )
-  );
+  let data = [];
+
+  if (invoiceResponse?.length > 0) {
+    data = processMonthsData(invoiceResponse);
+  }
 
   return (
     <Box
